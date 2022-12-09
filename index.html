@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>SOAP Mocking</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -16,8 +16,130 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>SOAP</h1>
+					<h3>Mocking</h3>
+					<p>
+						<small>Created by <a href="http://twitter.com/kierat_s">@kierat_s</a></small>
+					</p>
+
+					<aside class="notes">
+						How many of you used SOAP?
+						How many of you is familiar with XML/XSD/WSDL?
+					</aside>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+					<ol>
+						<li>Getting started</li>
+						<li>Demo</li>
+					</ol>
+
+					<aside class="notes">
+						Feel free to break me if you need
+						Goal: show possibilities behind SOAP Mocking
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Simple Object Access Protocol</h2>
+						<ul>
+							<li><a href="https://www.w3.org/TR/soap/">Soap</a></li>
+						</ul>
+
+						<blockquote>
+							&ldquo;SOAP Version 1.2 is a lightweight protocol intended for exchanging structured information in a decentralized, distributed environment.&rdquo;
+						</blockquote>
+
+						<aside class="notes">
+							<ul>
+								<li>protokół komunikacyjny wykorzystujący XML do kodowania wywołań i najczęściej protokół HTTP do ich przenoszenia, możliwe jest jednak wykorzystanie innych protokołów do transportu danych</li>
+								<li>Soap 1.2 - guess year : 2007</li>
+							</ul>
+						</aside>
+					</section>
+
+					<section>
+						<h2>Getting started</h2>
+						<ol>
+							<li class="fragment"><a href="https://www.w3.org/XML/">XML</a></li>
+							<li class="fragment"><a href="https://www.w3.org/XML/Schema/">XSD</a></li>
+							<li class="fragment"><a href="https://www.w3.org/TR/wsdl/">WSDL</a></li>
+							<ul><li class="fragment">
+								<a href="https://wyszukiwarkaregon.stat.gov.pl/wsBIR/wsdl/UslugaBIRzewnPubl-ver11-prod.wsdl">GUS</a>
+								</li></ul>
+						</ol>
+
+						<aside class="notes">
+							Feel free to break me if you need
+							<ol>
+								<li>XML - Extensible Markup Language - rozszerzalny język znaczników</li>
+								<li>XSD - XML Schema Definition – definiowanie struktury</li>
+								<li>WSDL - Web Services Description Language - język definiowania usług sieciowych</li>
+							</ul>
+						</aside>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Envelope</h2>
+
+						<img data-src="images/soap.png">
+					</section>
+					<section>
+						<h2>Example</h2>
+						 <pre><code data-trim>
+POST /InStock HTTP/1.1
+Host: www.example.org
+Content-Type: application/soap+xml; charset=utf-8
+Content-Length: nnn
+
+<?xml version="1.0"?>
+<soap:Envelope
+	 xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+	 soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+  </m:GetStockPrice>
+</soap:Body>
+</soap:Envelope>
+
+						  </code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+						<ul>
+							<li>SoapUI: The World's Most Popular API Testing Tool</li>
+							<li>import GUS wsdl</li>
+							<li>show example DaneSzukajPodmioty</li>
+							<li>hide screen, login</li>
+							<li>----------</li>
+							<li>show how mock within soapUI</li>
+							<li>----------</li>
+							<li>show how setup mock within invoice-api</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-background-image="images/end.jpg">
+					<!-- The End -->
+				</section>
+
+				<section style="text-align: left;">
+					<h1>Thanks</h1>
+					<ul>
+						<li>presentation is <a href="http://runit.space/soap-mocking/">online</a></li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
@@ -31,6 +153,7 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				slideNumber: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
